@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken, Optional, Inject } from '@angular/core';
+
+export const SomeInjectionToken = new InjectionToken<AAA>('HostEnvironment');
+
+export const enum AAA {
+  S = 1,
+  D = 3
+}
 
 @Component({
   selector: 'app-root',
@@ -6,5 +13,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(
+    @Optional() @Inject(SomeInjectionToken) p: AAA
+  ) {
+    console.log(p);
+  }
   title = 'injectEnumBug';
 }
